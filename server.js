@@ -83,9 +83,17 @@ app.post("/note", function (req, res) {
                 "name": doc.name,
                 "note": doc.note
             };
-            res.json(returnMe);
-        }
 
+            if (typeof (doc.pass) === 'undefined') {
+                returnMe.gotpass = 'no';
+            } else {
+                returnMe.gotpass = 'yes';
+            }
+
+            res.json(returnMe);
+        } else {
+            res.json(null);
+        }
     });
 
 });
@@ -101,7 +109,28 @@ app.put("/note", function (req, res) {
             //client already exists - check password
             var result = JSON.stringify(doc);
 
-            if (doc.pass === req.body.pass) {
+            if (typeof (doc.pass) === 'undefined') {
+                //no password in original note
+                db.Clients.findAndModify({
+                    query: {
+                        name: req.body.name
+                    },
+                    update: {
+                        $set: {
+                            note: req.body.note
+                        }
+                    },
+                    new: true
+                }, function (err, doc, lastErrorObject) {
+                    var returnMe = {
+                        "name": doc.name,
+                        "note": doc.note,
+                        "gotpass": 'nooriginal'
+                    };
+                    res.json(returnMe);
+                });
+
+            } else if (doc.pass === req.body.pass) {
 
                 db.Clients.findAndModify({
                     query: {
@@ -118,6 +147,13 @@ app.put("/note", function (req, res) {
                         "name": doc.name,
                         "note": doc.note
                     };
+
+                    if (typeof (doc.pass) === 'undefined') {
+                        returnMe.gotpass = 'no';
+                    } else {
+                        returnMe.gotpass = 'yes';
+                    }
+
                     res.json(returnMe);
                 });
 
@@ -137,6 +173,13 @@ app.put("/note", function (req, res) {
                     "name": doc.name,
                     "note": doc.note
                 };
+
+                if (typeof (doc.pass) === 'undefined') {
+                    returnMe.gotpass = 'no';
+                } else {
+                    returnMe.gotpass = 'yes';
+                }
+
                 res.json(returnMe);
             });
         }

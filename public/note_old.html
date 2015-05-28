@@ -11,34 +11,42 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="noteController.js"></script>
+    
+    <link rel="stylesheet" href="css/note-style.css">
 
+     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    
 </head>
 
 <body>
 
 
+            
 
     <div class="container" ng-controller="NoteController">
-
-
 
 
         <div class="container">
             <form class="form-signin" role="form">
     
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-2"><input ng-model="client.name" placeholder="name of your note" required autofocus=""></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2"><button class="btn btn-block" ng-click="getAll()">load</button></div>
-                    <div class="col-md-3"></div>
+                    
+                    <div class="col-md-3"> <span class="fontawesome-user"></span><input type="text" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required ng-model="client.name"></div>
+                    
+                    <div class="col-md-3"><button class="btn btn-block" type="submit" ng-click="getAll()">load</button></div>
+                    <div class="col-md-3"> <span class="fontawesome-lock"></span><input type="password" value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required ng-model="client.pass"></div>
+                    <div class="col-md-3"><button class="btn btn-block" type="submit" ng-click="save()">save</button></div>
+                </div>
+                
+                <div class="row">
+                     <textarea id="text" cols="120" rows="10" my-maxlength="5" ng-model="client.note"></textarea>
                 </div>
 
-
+            </form>
         </div>
 
 
-
+{{status}}
 
 
         <!--
@@ -56,23 +64,13 @@
         </table>
 -->
 
-
-        <div class="row">
-
-            <div class="col-md-4">
-                <textarea id="text" cols="120" rows="10" my-maxlength="5" ng-model="client.note"></textarea>
-                <input ng-model="client.pass" placeholder="write key" type="password" required autofocus="">
-                <button class="btn btn-block" type="update" ng-click="save()">save</button>
-            </div>
-        </div>
-
         <!-- 	<div class="row">
 					<div class="col-md-4"><textarea id="text" cols="200" rows="10" my-maxlength="5" ng-model="client.note"></textarea></div>
 				</div>  -->
 
     </div>
 
-
+ 
 
 
 
