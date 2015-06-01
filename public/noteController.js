@@ -25,29 +25,53 @@ sampleApp.controller("NoteController", function ($scope, $http, $timeout, growl)
         });
     };
     $scope.messageNewNote = function () {
-        growl.info("No previous note of this name exists. It's yours if you save it.", {
-            title: 'A New Note!',
-            ttl: 7000
-        });
+        growl.info("A New Note!");
     };
     $scope.messageGotHasKey = function () {
-        growl.info("This note can only be modified using the matching write key.", {
-            title: 'Write Protected',
-            ttl: 7000
-        });
+        growl.info("You will need to enter the write key to modify this note.");
     };
     $scope.messageNoOriginalKey = function () {
-        growl.info("This note was created without a write key, so it stays that way... forever.", {
-            title: 'Write Key Ignored',
+        growl.info("You can only add a write key for a new note.", {
+            title: 'This note can\'t have a write key...',
             ttl: 7000
         });
     };
     $scope.messageErrorNoName = function () {
         growl.error("Oops, you forgot to name your note.");
     };
-
+    
+    
+    
+    $scope.messageWelcome1 = function () {
+        growl.success("Welcome to tinyText!", {
+            ttl: 30000
+        });
+    };
+    $scope.messageWelcome2 = function () {
+        growl.info("Name your note, enter some text and save it. You can access this note from any browser.", {
+            ttl: 30000
+        });
+    };
+    $scope.messageWelcome3 = function () {
+        growl.info("Anyone can read and modify your note, if they know its name.", {
+            ttl: 30000
+        });
+    };
+    $scope.messageWelcome4 = function () {
+        growl.info("If you enter a \'write key\', before the first save, then only you will be able to modify it. It can still be read by anyone who knows the name.", {
+            ttl: 30000
+        });
+    };
+    
+//
+//    $scope.messageWelcome1 = function () {
+//        growl.info("Name your note, enter some text and save it. \n \n Anyone can read and modify your note, if they know its name. \n \n If you enter a \'write key\', before the first save, then only you will be able to modify it. It can still be read by anyone who knows the name.", {
+//            title: 'Welcome to tinyType.',
+//            ttl: 30000
+//        });
+//    };
+    
     $scope.addSpecialWarnMessage2 = function () {
-        
         /*
         //growl.warning("This adds a warn message", {title: 'Warning!'});
         //growl.info("This adds a info message", {title: 'Random Information'});
@@ -56,6 +80,11 @@ sampleApp.controller("NoteController", function ($scope, $http, $timeout, growl)
         */
     };
 
+      $scope.messageWelcome1();
+    $scope.messageWelcome2();
+    $scope.messageWelcome3();
+    $scope.messageWelcome4();
+    
     $scope.getAll = function () {
 
         if ($scope.client === null) {
@@ -89,9 +118,9 @@ sampleApp.controller("NoteController", function ($scope, $http, $timeout, growl)
 
 
     $scope.save = function () {
-
-        if ($scope.client === null || $scope.client.name === "") {
-            $scope.status = "no name, pls add name";
+        console.log($scope.client);  
+        if ($scope.client === null || $scope.client.name === "" || typeof ($scope.client.name) === 'undefined' || $scope.client === undefined) {
+            $scope.messageErrorNoName();
             return;
         } else {
 
@@ -118,10 +147,6 @@ sampleApp.controller("NoteController", function ($scope, $http, $timeout, growl)
         }
 
     };
-
-    $scope.insert = function () {
-
-    }
 
 
 

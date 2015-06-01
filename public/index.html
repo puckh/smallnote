@@ -59,31 +59,38 @@
 
                             <div class="row">
                                 <span class="fontawesome-user"></span>
-                                <input ng-model="client.name" type="text" value="Note Name" onBlur="if(this.value == '') this.value = 'Note Name'" onFocus="if(this.value == 'Note Name') this.value = ''">
+                                <input ng-model="client.name" type="text" value="Note Name" placeholder="name this note" >
                             </div>
 
                             <div class="row">
-                                <input type="submit" value="Load This Note" ng-click="getAll()">
+                                <input type="submit" value="Load" ng-click="getAll()">
                             </div>
 
                             <br>
                            
 
                             <div class="row">
-                                <input type="submit" ng-click="isCollapsed = !isCollapsed" value="Toggle Write Key">
-                                <!--                                <input id="toggle-event" type="checkbox" data-toggle="toggle">-->
-                                <!--                                <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>-->
+                                <input type="submit" class="fontawesome-lock" ng-click="isCollapsed = !isCollapsed" value="Toggle Write Key">
+                                
+                                <!--onBlur="if(this.value == '') this.value = 'Note Name'" onFocus="if(this.value == 'Note Name') this.value = ''"
+
+<input id="toggle-event" type="checkbox" data-toggle="toggle">-->
+                                
+                                
+                                <!--onBlur="if(this.value == '') this.value = 'Write Key'" onFocus="if(this.value == 'Write Key') this.value = ''"
+
+<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>-->
                             </div>
                             <div collapse="isCollapsed" class="row">
                                 <span class="fontawesome-lock"></span>
-                                <input ng-model="client.pass" type="text" value="Write Key" onBlur="if(this.value == '') this.value = 'Write Key'" onFocus="if(this.value == 'Write Key') this.value = ''">
+                                <input ng-model="client.pass" type="text" value="Write Key" placeholder="write key" >
                             </div>
 
                              <br>
                              <br>
                             
                             <div class="row">
-                                <input type="submit" value="Save Changes" ng-click="save()">
+                                <input type="submit" value="Save" ng-click="save()">
                             </div>
 
                         </div>
